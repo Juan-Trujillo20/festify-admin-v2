@@ -1,5 +1,5 @@
 import type {Artist, ArtistRequest} from "@/types/artist.ts";
-import type {ErrorResponse} from "@/types/common.ts";
+import type {ErrorResponse} from "@/types/festival";
 
 const artistAPIBaseURL = "http://localhost:8080";
 

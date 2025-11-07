@@ -4,7 +4,7 @@ import {type ChangeEvent, useEffect, useState} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {getArtist, updateArtist} from "@/services/artists.ts";
 import type {Artist, ArtistRequest} from "@/types/artist.ts";
-import type {ErrorResponse} from "@/types/common.ts";
+import type {ErrorResponse} from "@/types/festival";
 
 
 type ArtistForm = {

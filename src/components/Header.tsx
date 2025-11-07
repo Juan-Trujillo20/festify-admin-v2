@@ -7,6 +7,7 @@ export default function Header(){
             <nav className="hidden md:flex items-center gap-4 text-sm">
                 <Link to="/artists">Artistas</Link>
                 <Link to="#">Albums</Link>
+                <Link to="/festivales">Festivales</Link>
             </nav>
         </div>
     </header>
