@@ -1,5 +1,6 @@
 import type {Artist, ArtistRequest} from "@/types/artist.ts";
-import type {ErrorResponse} from "@/types/festival";
+import type { ErrorResponse } from "react-router-dom";
+
 
 const artistAPIBaseURL = "http://localhost:8080";
 
