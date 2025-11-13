@@ -1,10 +1,10 @@
 import Header from "@/components/Header.tsx";
 import Footer from "@/components/Footer.tsx";
 import {type ChangeEvent, useEffect, useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, type ErrorResponse} from "react-router-dom";
 import type {Artist, ArtistRequest} from "@/types/artist.ts";
 import {createArtists} from "@/services/artists.ts";
-import type {ErrorResponse} from "@/types/festival";
+
 
 type ArtistForm = {
     name: string;

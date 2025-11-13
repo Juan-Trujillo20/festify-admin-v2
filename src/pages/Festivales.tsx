@@ -1,22 +1,62 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { listFestivals } from "@/services/festivales";
-import type { Festival } from "@/types/festival";
+import { deleteFestival, listFestivals } from "@/services/festivales";
+
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-
+type FestivalTableItem   = {
+    id: string;
+    title: string;
+    about: string;
+    city: string;
+    from: string;
+    to: string;
+    price_from: number;
+    price_to: number;
+}
 export default function Festivales() {
-    const [festivales, setFestivales] = useState<Festival[]>([]);
+    const [festivales, setFestivales] = useState<FestivalTableItem[]>([]);
 
     useEffect(() => {
-        listFestivals().then((fes) => {
-            setFestivales(fes);
-        }).catch((error) => {
-            console.error("Error loading festivals:", error);
-        })
+       const loadFestivals = async () => {
+            try {
+                const festivalsResponse = await listFestivals();
+                const result: FestivalTableItem[] = festivalsResponse.map(f => {
+                    return {
+                        ...f,
+                        id: f.id.toString(),
+                    }
+                })
+                setFestivales(result);
+            } catch (err) {
+                console.error(err);
+            }   
+        }
+        loadFestivals();
     }, []);
 
+    const handleDeleteFestival = (festivalId: string) => {
+    deleteFestival(festivalId)
+        .then((error) => {
+        if (!error.ok) {
+            alert(error.detail || "Error al eliminar el festival");
+            return;
+        } else{
+             alert("Festival eliminado correctamente");
+            setFestivales((prev) => prev?.filter((festival) => festival.id !== festivalId));
+        }
+
+        })
+        .catch((err) => {
+             console.error(err);
+        });
+};
+
+
+
+        
     return (
         <>
        <Header/>
@@ -71,6 +111,7 @@ export default function Festivales() {
                     <dd>{fest.from}— {fest.to}</dd>
                     </div>
                     <div className="flex items-center gap-2">
+                    
                     <dt className="text-neutral-500">📍</dt>
                     <dd>{fest.city}</dd>
                     </div>
@@ -81,14 +122,16 @@ export default function Festivales() {
                 </dl>
 
                 <div className="mt-4 flex items-center justify-end gap-2">
-                    <a href="./admin-festival-editar.html" className="px-2 py-1 rounded border">Editar</a>
-                    <button className="px-2 py-1 rounded border text-red-700">Eliminar</button>
+                    <Link to={"/editar-festivales/" + fest.id}
+                    className="px-2 py-1 rounded border">Editar</Link>
+                    <button className="px-2 py-1 rounded border text-red-700" onClick={(evt) =>{
+                        evt.preventDefault();
+                        handleDeleteFestival(fest.id)
+                    }}>
+                        
+                        Eliminar</button>
                 </div>
                 </article>
-    
-            
-                
-
 
             ))}
             

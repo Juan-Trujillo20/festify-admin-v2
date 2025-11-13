@@ -1,7 +1,7 @@
 import Header from "@/components/Header.tsx";
 import Footer from "@/components/Footer.tsx";
 import {type ChangeEvent, useEffect, useState} from "react";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams, type ErrorResponse} from "react-router-dom";
 import {getArtist, updateArtist} from "@/services/artists.ts";
 import type {Artist, ArtistRequest} from "@/types/artist.ts";
 
