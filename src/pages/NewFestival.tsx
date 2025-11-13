@@ -67,7 +67,7 @@ export default function NewFestivaL(){
     }
 
     const handleSubmitFormFestival=async (evt:React.FormEvent<HTMLFormElement>)=>{
-      debugger;
+      
       evt.preventDefault();
       const request:FestivalRequest={
         ...form,
